@@ -57,10 +57,29 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
-
+  <script> // This is my solution
+  // We want something to occur when a key is pressed
+  window.addEventListener('keydown',function(e) {
+    // We need to search for the div corresponding with the key pressed
+    const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    // There are keys not handled
+    if (div) {
+      div.classList.add('playing');
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      audio.currentTime = 0; // Rewind to the start
+      audio.play(); 
+    }
+  });
+  // We want something to occur when a key is released
+  window.addEventListener('keyup',function(e) {
+    // We need to search for the div corresponding with the key pressed
+    const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    // There are keys not handled
+    if (div) {
+      div.classList.remove('playing');  
+    }
+  });
 </script>
-
 
 </body>
 </html>
